@@ -15,7 +15,7 @@ var messageBoard = function() {
   } else {
     return;
   }
-};
+};  
 
 nameForm.addEventListener('keypress', function(e) {
   if (e.keyCode == 13) {
