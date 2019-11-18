@@ -13,3 +13,12 @@
   grid-template-columns: auto auto auto;
   width: 300px;
 }
+
+.name-input {
+  width: 100%;
+}
+
+#player-names {
+  width: 300px;
+}
+

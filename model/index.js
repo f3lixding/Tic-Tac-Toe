@@ -1,5 +1,6 @@
 class Player {
   constructor(id) {
+    this.name;
     this.id = id;
     this.tokens = [];
     this.wins = 0;
@@ -52,7 +53,7 @@ class Board {
     }
     //re-rendering scoreBoard
     for (var i = 0; i < scores.length; i++) {
-      scores[i].innerText = 'player ' + String(i + 1) + ' victories: ' + String(this.players[i].wins);
+      scores[i].innerText = 'player ' + (this.players[i].name || String(i + 1)) + ' victories: ' + String(this.players[i].wins);
     }
     //reset game state
     for (var i = 0; i < this.status.length; i++) {
