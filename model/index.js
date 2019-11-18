@@ -2,6 +2,7 @@ class Player {
   constructor(id) {
     this.id = id;
     this.tokens = [];
+    this.wins = 0;
   }
 
   place(token) {
@@ -33,13 +34,34 @@ class Board {
       return false;
     }
     this.status[i][j] = new Token(newCoord, this.currentPlayer.id);
-    this.currentPlayer.tokens.push(this.status[i][j]);
+    this.currentPlayer.place(this.status[i][j]);
     this.checkWin();
     return true;
   }
 
   switchPlayer() {
     this.currentPlayer = this.currentPlayer === this.players[0] ? this.players[1] : this.players[0];
+  }
+
+  reset() {
+    var gridItems = document.getElementsByClassName('grid-item');
+    var scores = document.getElementsByClassName('score');
+    // re-rendering grid
+    for (var i = 0; i < gridItems.length; i++) {
+      gridItems[i].innerText = '';
+    }
+    //re-rendering scoreBoard
+    for (var i = 0; i < scores.length; i++) {
+      scores[i].innerText = 'player ' + String(i + 1) + ' victories: ' + String(this.players[i].wins);
+    }
+    //reset game state
+    for (var i = 0; i < this.status.length; i++) {
+      for (var j = 0; j < this.status[i].length; j++) {
+        this.status[i][j] = undefined;
+      }
+    }
+    // reset winner
+    this.winner = undefined;
   }
 
   checkWin() {
@@ -58,7 +80,8 @@ class Board {
           newX += dir[i];
           newY += dir[i + 1];
           if (acc === 3) {
-            this.winner = lastPlaced.id;
+            this.winner = this.currentPlayer;
+            this.winner.wins++;
           }
         }
         i += 2;
