@@ -83,6 +83,7 @@ class Board {
           if (acc === 3) {
             this.winner = this.currentPlayer;
             this.winner.wins++;
+            return;
           }
         }
         i += 2;
